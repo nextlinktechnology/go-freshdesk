@@ -106,6 +106,7 @@ type Reply struct {
 	FromEmail   string        `json:"from_email"`
 	CCEmails    []string      `json:"cc_emails"`
 	BCCEmails   []string      `json:"bcc_emails"`
+	ToEmails    []string      `json:"to_emails"`
 	TicketID    int           `json:"ticket_id"`
 	RepliedTo   []string      `json:"replied_to"`
 	Attachments []interface{} `json:"attachments"`
