@@ -168,6 +168,10 @@ func (t Ticket) Print() {
 	jsonb, _ := json.MarshalIndent(t, "", "    ")
 	fmt.Println(string(jsonb))
 }
+func (r Reply) Print() {
+	jsonb, _ := json.MarshalIndent(r, "", "    ")
+	fmt.Println(string(jsonb))
+}
 
 type TicketSlice []Ticket
 
