@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/flinkstech/go-freshdesk/querybuilder"
+	"github.com/nextlinktechnology/go-freshdesk/querybuilder"
 )
 
 type TicketManager interface {

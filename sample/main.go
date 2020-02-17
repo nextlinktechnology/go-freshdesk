@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	freshdesk "github.com/flinkstech/go-freshdesk"
+	freshdesk "github.com/nextlinktechnology/go-freshdesk"
 )
 
 func main() {
@@ -22,7 +22,7 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	tickets.Print()
+	tickets.Results.Print()
 
 	ticket, err := client.Tickets.Create(freshdesk.CreateTicket{
 		Subject:     "Ticket Subject",

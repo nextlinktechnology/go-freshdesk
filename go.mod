@@ -1,1 +1,3 @@
-module github.com/flinkstech/go-freshdesk
+module github.com/nextlinktechnology/go-freshdesk
+
+go 1.12
