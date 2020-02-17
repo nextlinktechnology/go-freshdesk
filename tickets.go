@@ -226,11 +226,14 @@ func (manager ticketManager) View(id int) (Ticket, error) {
 
 func (manager ticketManager) Reply(id int, reply CreateReply) (Reply, error) {
 	output := Reply{}
-	_, err := manager.client.get(endpoints.tickets.reply(id), &output)
+	jsonb, err := json.Marshal(reply)
+	if err != nil {
+		return output, err
+	}
+	err = manager.client.postJSON(endpoints.tickets.create, jsonb, &output, http.StatusCreated)
 	if err != nil {
 		return Reply{}, err
 	}
-
 	return output, nil
 }
 
