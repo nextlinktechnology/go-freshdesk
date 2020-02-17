@@ -114,7 +114,7 @@ type Reply struct {
 }
 
 type CreateReply struct {
-	Body        string        `json:"body,omitempty`
+	Body        string        `json:"body,omitempty"`
 	FromEmail   string        `json:"from_email,omitempty"`
 	Attachments []interface{} `json:"attachments,omitempty"`
 	UserID      int           `json:"user_id,omitempty"`
