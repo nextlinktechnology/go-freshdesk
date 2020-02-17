@@ -99,24 +99,24 @@ type CreateTicket struct {
 }
 
 type Reply struct {
-	BodyText    string        `json:"body_text,omitempty"`
-	Body        string        `json:"body,omitempty"`
-	ID          int           `json:"id,omitempty"`
-	UserID      int           `json:"user_id,omitempty"`
-	FromEmail   string        `json:"from_email,omitempty"`
-	CCEmails    []string      `json:"cc_emails,omitempty"`
-	BCCEmails   []string      `json:"bcc_emails,omitempty"`
-	TicketID    int           `json:"ticket_id,omitempty"`
-	RepliedTo   []string      `json:"replied_to,omitempty"`
+	BodyText    string        `json:"body_text"`
+	Body        string        `json:"body"`
+	ID          int           `json:"id"`
+	UserID      int           `json:"user_id"`
+	FromEmail   string        `json:"from_email"`
+	CCEmails    []string      `json:"cc_emails"`
+	BCCEmails   []string      `json:"bcc_emails"`
+	TicketID    int           `json:"ticket_id"`
+	RepliedTo   []string      `json:"replied_to"`
 	Attachments []interface{} `json:"attachments"`
 	CreatedAt   *time.Time    `json:"created_at"`
 	UpdatedAt   *time.Time    `json:"updated_at"`
 }
 
 type CreateReply struct {
-	Body        string        `json:"body,omitempty"`
+	Body        string        `json:"body"`
 	FromEmail   string        `json:"from_email,omitempty"`
-	Attachments []interface{} `json:"attachments"`
+	Attachments []interface{} `json:"attachments,omitempty"`
 	UserID      int           `json:"user_id,omitempty"`
 	CCEmails    []string      `json:"cc_emails,omitempty"`
 	BCCEmails   []string      `json:"bcc_emails,omitempty"`
