@@ -230,7 +230,7 @@ func (manager ticketManager) Reply(id int, reply CreateReply) (Reply, error) {
 	if err != nil {
 		return output, err
 	}
-	err = manager.client.postJSON(endpoints.tickets.create, jsonb, &output, http.StatusCreated)
+	err = manager.client.postJSON(endpoints.tickets.reply(id), jsonb, &output, http.StatusCreated)
 	if err != nil {
 		return Reply{}, err
 	}
