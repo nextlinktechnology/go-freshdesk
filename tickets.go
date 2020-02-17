@@ -97,6 +97,30 @@ type CreateTicket struct {
 	CompanyID          int                    `json:"company_id,omitempty"`
 }
 
+type Reply struct {
+	BodyText    string        `json:"body_text,omitempty"`
+	Body        string        `json:"body,omitempty"`
+	ID          int           `json:"id,omitempty"`
+	UserID      int           `json:"user_id,omitempty"`
+	FromEmail   string        `json:"from_email,omitempty"`
+	CCEmails    []string      `json:"cc_emails,omitempty"`
+	BCCEmails   []string      `json:"bcc_emails,omitempty"`
+	TicketID    int           `json:"ticket_id,omitempty"`
+	RepliedTo   []string      `json:"replied_to,omitempty"`
+	Attachments []interface{} `json:"attachments"`
+	CreatedAt   *time.Time    `json:"created_at"`
+	UpdatedAt   *time.Time    `json:"updated_at"`
+}
+
+type CreateReply struct {
+	Body        string        `json:"body,omitempty"`
+	FromEmail   string        `json:"from_email,omitempty"`
+	Attachments []interface{} `json:"attachments"`
+	UserID      int           `json:"user_id,omitempty"`
+	CCEmails    []string      `json:"cc_emails,omitempty"`
+	BCCEmails   []string      `json:"bcc_emails,omitempty"`
+}
+
 type Source int
 type Status int
 type Priority int
@@ -190,6 +214,16 @@ func (manager ticketManager) View(id int) (Ticket, error) {
 	_, err := manager.client.get(endpoints.tickets.view(id), &output)
 	if err != nil {
 		return Ticket{}, err
+	}
+
+	return output, nil
+}
+
+func (manager ticketManager) Reply(id int, reply CreateReply) (Reply, error) {
+	output := Reply{}
+	_, err := manager.client.get(endpoints.tickets.reply(id), &output)
+	if err != nil {
+		return Reply{}, err
 	}
 
 	return output, nil
