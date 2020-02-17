@@ -15,6 +15,7 @@ type TicketManager interface {
 	Create(CreateTicket) (Ticket, error)
 	View(int) (Ticket, error)
 	Search(querybuilder.Query) (TicketResults, error)
+	Reply(int, CreateReply) (Reply, error)
 }
 
 type ticketManager struct {
