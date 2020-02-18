@@ -49,11 +49,12 @@ type solutionEndpoints struct {
 }
 
 type ticketEndpoints struct {
-	all    string
-	create string
-	view   func(int) string
-	search func(string) string
-	reply  func(int) string
+	all           string
+	create        string
+	view          func(int) string
+	search        func(string) string
+	reply         func(int) string
+	conversations func(int) string
 }
 
 var endpoints = struct {
@@ -101,10 +102,11 @@ var endpoints = struct {
 		},
 	},
 	tickets: ticketEndpoints{
-		all:    "/api/v2/tickets",
-		create: "/api/v2/tickets",
-		view:   func(id int) string { return fmt.Sprintf("/api/v2/tickets/%d", id) },
-		search: func(query string) string { return fmt.Sprintf("/api/v2/search/tickets?%s", query) },
-		reply:  func(id int) string { return fmt.Sprintf("/api/v2/tickets/%d/reply", id) },
+		all:           "/api/v2/tickets",
+		create:        "/api/v2/tickets",
+		view:          func(id int) string { return fmt.Sprintf("/api/v2/tickets/%d", id) },
+		search:        func(query string) string { return fmt.Sprintf("/api/v2/search/tickets?%s", query) },
+		reply:         func(id int) string { return fmt.Sprintf("/api/v2/tickets/%d/reply", id) },
+		conversations: func(id int) string { return fmt.Sprintf("/api/v2/tickets/%d/conversations", id) },
 	},
 }

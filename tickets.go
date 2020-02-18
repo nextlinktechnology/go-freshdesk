@@ -16,6 +16,7 @@ type TicketManager interface {
 	View(int) (Ticket, error)
 	Search(querybuilder.Query) (TicketResults, error)
 	Reply(int, CreateReply) (Reply, error)
+	Conversations(int) (ConversationSlice, error)
 }
 
 type ticketManager struct {
@@ -96,6 +97,27 @@ type CreateTicket struct {
 	Source             int                    `json:"source,omitempty"`
 	Tags               []string               `json:"tags,omitempty"`
 	CompanyID          int                    `json:"company_id,omitempty"`
+}
+
+type Conversation struct {
+	BodyText     string   `json:"body_text"`
+	Body         string   `json:"body"`
+	ID           int      `json:"id"`
+	Incoming     bool     `json:"incoming"`
+	ToEmails     []string `json:"to_emails"`
+	Private      bool     `json:"private"`
+	Source       int      `json:"source"`
+	SupportEmail string   `json:"support_email"`
+	TicketID     int      `json:"ticket_id"`
+
+	UserID    int        `json:"user_id"`
+	CreatedAt *time.Time `json:"created_at"`
+	UpdatedAt *time.Time `json:"updated_at"`
+	FromEmail string     `json:"from_email"`
+	CCEmails  []string   `json:"cc_emails"`
+	BCCEmails []string   `json:"bcc_emails"`
+
+	Attachments []interface{} `json:"attachments"`
 }
 
 type Reply struct {
@@ -189,6 +211,20 @@ func (s TicketSlice) Print() {
 	}
 }
 
+type ConversationSlice []Conversation
+
+func (s ConversationSlice) Len() int { return len(s) }
+
+func (s ConversationSlice) Less(i, j int) bool { return s[i].CreatedAt.Unix() < s[j].CreatedAt.Unix() }
+
+func (s ConversationSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+
+func (s ConversationSlice) Print() {
+	for _, ticket := range s {
+		fmt.Println(ticket.BodyText)
+	}
+}
+
 func (manager ticketManager) All() (TicketResults, error) {
 	output := TicketSlice{}
 	headers, err := manager.client.get(endpoints.tickets.all, &output)
@@ -222,6 +258,15 @@ func (manager ticketManager) View(id int) (Ticket, error) {
 		return Ticket{}, err
 	}
 
+	return output, nil
+}
+
+func (manager ticketManager) Conversations(id int) (ConversationSlice, error) {
+	output := ConversationSlice{}
+	_, err := manager.client.get(endpoints.tickets.conversations(id), &output)
+	if err != nil {
+		return ConversationSlice{}, err
+	}
 	return output, nil
 }
 
