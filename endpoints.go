@@ -110,7 +110,7 @@ var endpoints = struct {
 		reply:         func(id int) string { return fmt.Sprintf("/api/v2/tickets/%d/reply", id) },
 		conversations: func(id int) string { return fmt.Sprintf("/api/v2/tickets/%d/conversations", id) },
 		updatedSinceAll: func(timeString string) string {
-			return fmt.Sprintf("/api/v2/search/tickets?updated_since=%s", timeString)
+			return fmt.Sprintf("/api/v2/tickets?updated_since=%s", timeString)
 		},
 	},
 }
