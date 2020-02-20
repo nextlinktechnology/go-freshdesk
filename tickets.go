@@ -339,12 +339,16 @@ func (results TicketResults) Next() (TicketResults, error) {
 	if results.next == "" {
 		return TicketResults{}, errors.New("no more tickets")
 	}
-	nextSlice := TicketResults{}
-	_, err := results.client.get(results.next, &nextSlice)
+	output := TicketSlice{}
+	headers, err := results.client.get(results.next, &output)
 	if err != nil {
 		return TicketResults{}, err
 	}
-	return nextSlice, nil
+	return TicketResults{
+		Results: output,
+		client:  results.client,
+		next:    results.client.getNextLink(headers),
+	}, nil
 }
 
 func (results *TicketResults) FilterTags(tags ...string) *TicketResults {
