@@ -49,12 +49,13 @@ type solutionEndpoints struct {
 }
 
 type ticketEndpoints struct {
-	all           string
-	create        string
-	view          func(int) string
-	search        func(string) string
-	reply         func(int) string
-	conversations func(int) string
+	all             string
+	create          string
+	view            func(int) string
+	search          func(string) string
+	reply           func(int) string
+	conversations   func(int) string
+	updatedSinceAll func(string) string
 }
 
 var endpoints = struct {
@@ -108,5 +109,8 @@ var endpoints = struct {
 		search:        func(query string) string { return fmt.Sprintf("/api/v2/search/tickets?%s", query) },
 		reply:         func(id int) string { return fmt.Sprintf("/api/v2/tickets/%d/reply", id) },
 		conversations: func(id int) string { return fmt.Sprintf("/api/v2/tickets/%d/conversations", id) },
+		updatedSinceAll: func(timeString string) string {
+			return fmt.Sprintf("/api/v2/search/tickets?updated_since=%s", timeString)
+		},
 	},
 }

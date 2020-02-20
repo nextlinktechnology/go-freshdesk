@@ -17,6 +17,7 @@ type TicketManager interface {
 	Search(querybuilder.Query) (TicketResults, error)
 	Reply(int, CreateReply) (Reply, error)
 	Conversations(int) (ConversationSlice, error)
+	UpdatedSinceAll(string) (TicketResults, error)
 }
 
 type ticketManager struct {
@@ -228,6 +229,19 @@ func (s ConversationSlice) Print() {
 func (manager ticketManager) All() (TicketResults, error) {
 	output := TicketSlice{}
 	headers, err := manager.client.get(endpoints.tickets.all, &output)
+	if err != nil {
+		return TicketResults{}, err
+	}
+	return TicketResults{
+		Results: output,
+		client:  manager.client,
+		next:    manager.client.getNextLink(headers),
+	}, nil
+}
+
+func (manager ticketManager) UpdatedSinceAll(timeString string) (TicketResults, error) {
+	output := TicketSlice{}
+	headers, err := manager.client.get(endpoints.tickets.updatedSinceAll(timeString), &output)
 	if err != nil {
 		return TicketResults{}, err
 	}
