@@ -10,7 +10,7 @@ import (
 type CompanyManager interface {
 	All() (CompanySlice, error)
 	Create(CreateCompany) (Company, error)
-	Update(int, CreateCompany) (Company, error)
+	Update(int64, CreateCompany) (Company, error)
 }
 
 type companyManager struct {
@@ -24,7 +24,7 @@ func newCompanyManager(client *ApiClient) companyManager {
 }
 
 type Company struct {
-	ID           int                    `json:"id"`
+	ID           int64                  `json:"id"`
 	Name         string                 `json:"name"`
 	Description  string                 `json:"description"`
 	Domains      []string               `json:"domains"`
@@ -104,7 +104,7 @@ func (manager companyManager) Create(company CreateCompany) (Company, error) {
 	return output, nil
 }
 
-func (manager companyManager) Update(id int, company CreateCompany) (Company, error) {
+func (manager companyManager) Update(id int64, company CreateCompany) (Company, error) {
 	output := Company{}
 	jsonb, err := json.Marshal(company)
 	if err != nil {

@@ -23,7 +23,7 @@ func newAgentManager(client *ApiClient) agentManager {
 type Agent struct {
 	Available      bool       `json:"available"`
 	AvailableSince *time.Time `json:"available_since"`
-	ID             int        `json:"id"`
+	ID             int64      `json:"id"`
 	Occasional     bool       `json:"occasional"`
 	Signature      string     `json:"signature"`
 	TicketScope    int        `json:"ticket_scope"`

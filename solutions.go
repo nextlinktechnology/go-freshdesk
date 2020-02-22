@@ -20,7 +20,7 @@ func newSolutionManager(client *ApiClient) solutionManager {
 }
 
 type Category struct {
-	ID               int        `json:"id,omitempty"`
+	ID               int64      `json:"id,omitempty"`
 	Name             string     `json:"name,omitempty"`
 	Description      string     `json:"description,omitempty"`
 	VisibleInPortals []int      `json:"visible_in_portals"`
@@ -50,11 +50,11 @@ func (slice CategorySlice) Print() {
 }
 
 type Folder struct {
-	ID          int        `json:"id,omitempty"`
+	ID          int64      `json:"id,omitempty"`
 	Name        string     `json:"name,omitempty"`
 	Description string     `json:"description,omitempty"`
 	Visibility  int        `json:"visibility"`
-	CompanyIDs  []int      `json:"company_ids"`
+	CompanyIDs  []int64    `json:"company_ids"`
 	CreatedAt   *time.Time `json:"created_at"`
 	UpdatedAt   *time.Time `json:"updated_at"`
 	client      *ApiClient
@@ -81,13 +81,13 @@ func (slice FolderSlice) Print() {
 }
 
 type Article struct {
-	ID              int               `json:"id,omitempty"`
+	ID              int64             `json:"id,omitempty"`
 	Title           string            `json:"title"`
 	Description     string            `json:"description,omitempty"`
 	DescriptionText string            `json:"description_text"`
-	AgentID         int               `json:"agent_id"`
-	CategoryID      int               `json:"updated_at"`
-	FolderID        int               `json:"folder_id"`
+	AgentID         int64             `json:"agent_id"`
+	CategoryID      int64             `json:"updated_at"`
+	FolderID        int64             `json:"folder_id"`
 	Hits            int               `json:"hits"`
 	Status          int               `json:"status"`
 	SEOData         map[string]string `json:"seo_data"`

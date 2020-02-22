@@ -8,7 +8,7 @@ import (
 
 type SLAPolicyManager interface {
 	All() (SLAPolicySlice, error)
-	Update(int, SLAPolicy) (SLAPolicy, error)
+	Update(int64, SLAPolicy) (SLAPolicy, error)
 }
 
 type slaPolicyManager struct {
@@ -22,7 +22,7 @@ func newSLAPolicyManager(client *ApiClient) slaPolicyManager {
 }
 
 type SLAPolicy struct {
-	ID           int              `json:"id,omitempty"`
+	ID           int64            `json:"id,omitempty"`
 	Name         string           `json:"name,omitempty"`
 	Description  string           `json:"description,omitempty"`
 	ApplicableTo map[string][]int `json:"applicable_to,omitempty"`
@@ -74,7 +74,7 @@ func (manager slaPolicyManager) All() (SLAPolicySlice, error) {
 	return outputWithClient, nil
 }
 
-func (manager slaPolicyManager) Update(id int, policy SLAPolicy) (SLAPolicy, error) {
+func (manager slaPolicyManager) Update(id int64, policy SLAPolicy) (SLAPolicy, error) {
 	output := SLAPolicy{}
 	jsonb, err := json.Marshal(policy)
 	if err != nil {

@@ -32,7 +32,7 @@ type UserResults struct {
 }
 
 type User struct {
-	ID               int                    `json:"id,omitempty"`
+	ID               int64                  `json:"id,omitempty"`
 	Name             string                 `json:"name,omitempty"`
 	Active           string                 `json:"active,omitempty"`
 	Email            string                 `json:"email,omitempty"`
@@ -46,7 +46,7 @@ type User struct {
 	UpdatedAt        *time.Time             `json:"updated_at,omitempty"`
 	Address          string                 `json:"address,omitempty"`
 	Avatar           interface{}            `json:"avatar,omitempty"`
-	CompanyID        int                    `json:"company_id,omitempty"`
+	CompanyID        int64                  `json:"company_id,omitempty"`
 	ViewAllTickets   bool                   `json:"view_all_tickets,omitempty"`
 	CustomFields     map[string]interface{} `json:"custom_fields,omitempty"`
 	Deleted          bool                   `json:"deleted,omitempty"`
@@ -121,7 +121,7 @@ func (manager userManager) Create(user *User) (*User, error) {
 	return output, nil
 }
 
-func (manager userManager) Update(id int, user *User) (*User, error) {
+func (manager userManager) Update(id int64, user *User) (*User, error) {
 	output := &User{}
 	jsonb, err := json.Marshal(user)
 	if err != nil {

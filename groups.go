@@ -20,7 +20,7 @@ func newGroupManager(client *ApiClient) groupManager {
 }
 
 type Group struct {
-	ID               int        `json:"id"`
+	ID               int64      `json:"id"`
 	Name             string     `json:"name"`
 	Description      string     `json:"description"`
 	BusinessHourID   string     `json:"business_hour_id"`
