@@ -216,7 +216,7 @@ type ConversationSlice []Conversation
 
 func (s ConversationSlice) Len() int { return len(s) }
 
-func (s ConversationSlice) Less(i, j int) bool { return s[i].CreatedAt.Unix() < s[j].CreatedAt.Unix() }
+func (s ConversationSlice) Less(i, j int) bool { return s[i].CreatedAt.Unix() > s[j].CreatedAt.Unix() }
 
 func (s ConversationSlice) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 
