@@ -24,11 +24,11 @@ func newCompanyManager(client *ApiClient) companyManager {
 }
 
 type Company struct {
-	ID           int64                  `json:"id"`
+	ID           int64                  `xorm:"pk 'id'" json:"id"`
 	Name         string                 `json:"name"`
-	Description  string                 `json:"description"`
+	Description  string                 `xorm:"Text" json:"description"`
 	Domains      []string               `json:"domains"`
-	Note         string                 `json:"note"`
+	Note         string                 `xorm:"Text'" json:"note"`
 	HealthScore  string                 `json:"health_score"`
 	AccountTier  string                 `json:"account_tier"`
 	RenewalDate  *time.Time             `json:"renewal_date"`

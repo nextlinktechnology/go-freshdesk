@@ -32,7 +32,7 @@ type UserResults struct {
 }
 
 type User struct {
-	ID               int64                  `json:"id,omitempty"`
+	ID               int64                  `xorm:"pk 'id'" json:"id,omitempty"`
 	Name             string                 `json:"name,omitempty"`
 	Active           string                 `json:"active,omitempty"`
 	Email            string                 `json:"email,omitempty"`
@@ -46,7 +46,7 @@ type User struct {
 	UpdatedAt        *time.Time             `json:"updated_at,omitempty"`
 	Address          string                 `json:"address,omitempty"`
 	Avatar           interface{}            `json:"avatar,omitempty"`
-	CompanyID        int64                  `json:"company_id,omitempty"`
+	CompanyID        int64                  `xorm:"'company_id'" json:"company_id,omitempty"`
 	ViewAllTickets   bool                   `json:"view_all_tickets,omitempty"`
 	CustomFields     map[string]interface{} `json:"custom_fields,omitempty"`
 	Deleted          bool                   `json:"deleted,omitempty"`
@@ -54,7 +54,7 @@ type User struct {
 	OtherEmails      []string               `json:"other_emails,omitempty"`
 	Tags             []string               `json:"tags,omitempty"`
 	TwitterID        string                 `json:"twitter_id,omitempty"`
-	UniqueExternalID string                 `json:"unique_external_id,omitempty"`
+	UniqueExternalID string                 `xorm:"'unique_external_id'" json:"unique_external_id,omitempty"`
 	OtherCompanies   []string               `json:"other_companies,omitempty"`
 }
 
