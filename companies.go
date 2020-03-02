@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 	"time"
+
+	"github.com/Kamva/mgm/v2"
 )
 
 type CompanyManager interface {
@@ -24,18 +26,19 @@ func newCompanyManager(client *ApiClient) companyManager {
 }
 
 type Company struct {
-	ID           int64                  `xorm:"pk 'id'" json:"id"`
-	Name         string                 `json:"name"`
-	Description  string                 `xorm:"Text" json:"description"`
-	Domains      []string               `json:"domains"`
-	Note         string                 `xorm:"Text'" json:"note"`
-	HealthScore  string                 `json:"health_score"`
-	AccountTier  string                 `json:"account_tier"`
-	RenewalDate  *time.Time             `json:"renewal_date"`
-	Industry     string                 `json:"industry"`
-	CreatedAt    *time.Time             `json:"created_at"`
-	UpdatedAt    *time.Time             `json:"updated_at"`
-	CustomFields map[string]interface{} `json:"custom_fields"`
+	mgm.DefaultModel `bson:",inline" xorm:"-"`
+	ID               int64                  `bson:"id" xorm:"pk 'id'" json:"id"`
+	Name             string                 `bson:"name" json:"name"`
+	Description      string                 `bson:"description" xorm:"Text" json:"description"`
+	Domains          []string               `bson:"domains" json:"domains"`
+	Note             string                 `bson:"note" xorm:"Text" json:"note"`
+	HealthScore      string                 `bson:"health_score" json:"health_score"`
+	AccountTier      string                 `bson:"account_tier" json:"account_tier"`
+	RenewalDate      *time.Time             `bson:"renewal_date" json:"renewal_date"`
+	Industry         string                 `bson:"industry" json:"industry"`
+	CreatedAt        *time.Time             `bson:"created_at" json:"created_at"`
+	UpdatedAt        *time.Time             `bson:"updated_at" json:"updated_at"`
+	CustomFields     map[string]interface{} `bson:"custom_fields" json:"custom_fields"`
 }
 
 type CreateCompany struct {

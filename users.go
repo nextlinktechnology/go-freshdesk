@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/Kamva/mgm/v2"
 	"github.com/nextlinktechnology/go-freshdesk/querybuilder"
 )
 
@@ -32,30 +33,31 @@ type UserResults struct {
 }
 
 type User struct {
-	ID               int64                  `xorm:"pk 'id'" json:"id,omitempty"`
-	Name             string                 `json:"name,omitempty"`
-	Active           string                 `json:"active,omitempty"`
-	Email            string                 `json:"email,omitempty"`
-	JobTitle         string                 `json:"job_title,omitempty"`
-	Language         string                 `json:"language,omitempty"`
-	LastLoginAt      *time.Time             `json:"last_login_at,omitempty"`
-	Mobile           int                    `json:"mobile,omitempty"`
-	Phone            int                    `json:"phone,omitempty"`
-	TimeZone         string                 `json:"time_zone,omitempty"`
-	CreatedAt        *time.Time             `json:"created_at,omitempty"`
-	UpdatedAt        *time.Time             `json:"updated_at,omitempty"`
-	Address          string                 `json:"address,omitempty"`
-	Avatar           interface{}            `json:"avatar,omitempty"`
-	CompanyID        int64                  `xorm:"'company_id'" json:"company_id,omitempty"`
-	ViewAllTickets   bool                   `json:"view_all_tickets,omitempty"`
-	CustomFields     map[string]interface{} `json:"custom_fields,omitempty"`
-	Deleted          bool                   `json:"deleted,omitempty"`
-	Description      string                 `json:"description,omitempty"`
-	OtherEmails      []string               `json:"other_emails,omitempty"`
-	Tags             []string               `json:"tags,omitempty"`
-	TwitterID        string                 `json:"twitter_id,omitempty"`
-	UniqueExternalID string                 `xorm:"'unique_external_id'" json:"unique_external_id,omitempty"`
-	OtherCompanies   []string               `json:"other_companies,omitempty"`
+	mgm.DefaultModel `bson:",inline" xorm:"-"`
+	ID               int64                  `bson:"id" xorm:"pk 'id'" json:"id,omitempty"`
+	Name             string                 `bson:"name" json:"name,omitempty"`
+	Active           string                 `bson:"active" json:"active,omitempty"`
+	Email            string                 `bson:"email" json:"email,omitempty"`
+	JobTitle         string                 `bson:"job_title" json:"job_title,omitempty"`
+	Language         string                 `bson:"language" json:"language,omitempty"`
+	LastLoginAt      *time.Time             `bson:"last_login_at" json:"last_login_at,omitempty"`
+	Mobile           int                    `bson:"mobile" json:"mobile,omitempty"`
+	Phone            int                    `bson:"phone" json:"phone,omitempty"`
+	TimeZone         string                 `bson:"time_zone" json:"time_zone,omitempty"`
+	CreatedAt        *time.Time             `bson:"created_at" json:"created_at,omitempty"`
+	UpdatedAt        *time.Time             `bson:"updated_at" json:"updated_at,omitempty"`
+	Address          string                 `bson:"address" json:"address,omitempty"`
+	Avatar           interface{}            `bson:"avatar" json:"avatar,omitempty"`
+	CompanyID        int64                  `bson:"company_id" xorm:"'company_id'" json:"company_id,omitempty"`
+	ViewAllTickets   bool                   `bson:"view_all_tickets" json:"view_all_tickets,omitempty"`
+	CustomFields     map[string]interface{} `bson:"custom_fields" json:"custom_fields,omitempty"`
+	Deleted          bool                   `bson:"deleted" json:"deleted,omitempty"`
+	Description      string                 `bson:"description" xorm:"Text" json:"description,omitempty"`
+	OtherEmails      []string               `bson:"other_emails" json:"other_emails,omitempty"`
+	Tags             []string               `bson:"tags" json:"tags,omitempty"`
+	TwitterID        string                 `bson:"twitter_id" json:"twitter_id,omitempty"`
+	UniqueExternalID string                 `bson:"unique_external_id" xorm:"'unique_external_id'" json:"unique_external_id,omitempty"`
+	OtherCompanies   []string               `bson:"other_companies" json:"other_companies,omitempty"`
 }
 
 type UserSlice []User

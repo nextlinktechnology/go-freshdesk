@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/Kamva/mgm/v2"
 	"github.com/nextlinktechnology/go-freshdesk/querybuilder"
 )
 
@@ -37,40 +38,41 @@ func newTicketManager(client *ApiClient) ticketManager {
 }
 
 type Ticket struct {
-	ID                     int64                  `xorm:"pk 'id'" json:"id"`
-	Subject                string                 `xorm:"Text" json:"subject"`
-	Type                   string                 `json:"type"`
-	Description            string                 `xorm:"Text" json:"description"`
-	Attachments            []interface{}          `json:"attachments"`
-	CCEmails               []string               `xorm:"'cc_emails'" json:"cc_emails"`
-	CompanyID              int64                  `xorm:"'company_id'" json:"company_id"`
-	Deleted                bool                   `json:"deleted"`
-	DescriptionText        string                 `xorm:"Text" json:"description_text"`
-	DueBy                  *time.Time             `json:"due_by"`
-	Email                  string                 `json:"email"`
-	EmailConfigID          int64                  `xorm:"'email_config_id'" json:"email_config_id"`
-	FacebookID             string                 `xorm:"'facebook_id'" json:"facebook_id"`
-	FirstResponseDueBy     *time.Time             `xorm:"'fr_due_by'" json:"fr_due_by"`
-	FirstResponseEscalated bool                   `xorm:"'fr_escalated'" json:"fr_escalated"`
-	FwdEmails              []string               `json:"fwd_emails"`
-	GroupID                int64                  `xorm:"'group_id'" json:"group_id"`
-	IsEscalated            bool                   `json:"is_escalated"`
-	Name                   string                 `json:"name"`
-	Phone                  string                 `json:"phone"`
-	Priority               int                    `json:"priority"`
-	ProductID              int64                  `xorm:"'product_id'" json:"product_id"`
-	ReplyCCEmails          []string               `xorm:"'reply_cc_emails'" json:"reply_cc_emails"`
-	RequesterID            int64                  `xorm:"'requester_id'" json:"requester_id"`
-	ResponderID            int64                  `xorm:"'responder_id'" json:"responder_id"`
-	Source                 int                    `json:"source"`
-	Spam                   bool                   `json:"spam"`
-	Status                 int                    `json:"status"`
-	Tags                   []string               `json:"tags"`
-	ToEmails               []string               `json:"to_emails"`
-	TwitterID              string                 `xorm:"'twitter_id'" json:"twitter_id"`
-	CreatedAt              *time.Time             `json:"created_at"`
-	UpdatedAt              *time.Time             `json:"updated_at"`
-	CustomFields           map[string]interface{} `json:"custom_fields"`
+	mgm.DefaultModel       `bson:",inline" xorm:"-"`
+	ID                     int64                  `bson:"id" xorm:"pk 'id'" json:"id"`
+	Subject                string                 `bson:"subjecte" xorm:"Text" json:"subject"`
+	Type                   string                 `bson:"type" json:"type"`
+	Description            string                 `bson:"description" xorm:"Text" json:"description"`
+	Attachments            []interface{}          `bson:"attachments" json:"attachments"`
+	CCEmails               []string               `bson:"cc_emails" xorm:"'cc_emails'" json:"cc_emails"`
+	CompanyID              int64                  `bson:"company_id" xorm:"'company_id'" json:"company_id"`
+	Deleted                bool                   `bson:"deleted" json:"deleted"`
+	DescriptionText        string                 `bson:"description_text" xorm:"Text" json:"description_text"`
+	DueBy                  *time.Time             `bson:"due_by" json:"due_by"`
+	Email                  string                 `bson:"email" json:"email"`
+	EmailConfigID          int64                  `bson:"email_config_id" xorm:"'email_config_id'" json:"email_config_id"`
+	FacebookID             string                 `bson:"facebook_id" xorm:"'facebook_id'" json:"facebook_id"`
+	FirstResponseDueBy     *time.Time             `bson:"fr_due_by" xorm:"'fr_due_by'" json:"fr_due_by"`
+	FirstResponseEscalated bool                   `bson:"fr_escalated" xorm:"'fr_escalated'" json:"fr_escalated"`
+	FwdEmails              []string               `bson:"fwd_emails" json:"fwd_emails"`
+	GroupID                int64                  `bson:"group_id" xorm:"'group_id'" json:"group_id"`
+	IsEscalated            bool                   `bson:"is_escalated" json:"is_escalated"`
+	Name                   string                 `bson:"name" json:"name"`
+	Phone                  string                 `bson:"phone" json:"phone"`
+	Priority               int                    `bson:"priority" json:"priority"`
+	ProductID              int64                  `bson:"product_id" xorm:"'product_id'" json:"product_id"`
+	ReplyCCEmails          []string               `bson:"reply_cc_emails" xorm:"'reply_cc_emails'" json:"reply_cc_emails"`
+	RequesterID            int64                  `bson:"requester_id" xorm:"'requester_id'" json:"requester_id"`
+	ResponderID            int64                  `bson:"responder_id" xorm:"'responder_id'" json:"responder_id"`
+	Source                 int                    `bson:"source" json:"source"`
+	Spam                   bool                   `bson:"spam" json:"spam"`
+	Status                 int                    `bson:"status" json:"status"`
+	Tags                   []string               `bson:"tags" json:"tags"`
+	ToEmails               []string               `bson:"to_emails" json:"to_emails"`
+	TwitterID              string                 `bson:"twitter_id" xorm:"'twitter_id'" json:"twitter_id"`
+	CreatedAt              *time.Time             `bson:"created_at" json:"created_at"`
+	UpdatedAt              *time.Time             `bson:"updated_at" json:"updated_at"`
+	CustomFields           map[string]interface{} `bson:"custom_fields" json:"custom_fields"`
 }
 
 type CreateTicket struct {
@@ -101,22 +103,22 @@ type CreateTicket struct {
 }
 
 type Conversation struct {
-	BodyText     string   `xorm:"Text" json:"body_text"`
-	Body         string   `xorm:"Text" json:"body"`
-	ID           int64    `xorm:"pk 'id'" json:"id"`
-	Incoming     bool     `json:"incoming"`
-	ToEmails     []string `json:"to_emails"`
-	Private      bool     `json:"private"`
-	Source       int      `json:"source"`
-	SupportEmail string   `json:"support_email"`
-	TicketID     int64    `xorm:"pk 'ticket_id'" json:"ticket_id"`
-
-	UserID    int64      `xorm:"'user_id'" json:"user_id"`
-	CreatedAt *time.Time `json:"created_at"`
-	UpdatedAt *time.Time `json:"updated_at"`
-	FromEmail string     `json:"from_email"`
-	CCEmails  []string   `xorm:"'cc_emails'" json:"cc_emails"`
-	BCCEmails []string   `xorm:"'bcc_emails'" json:"bcc_emails"`
+	mgm.DefaultModel `bson:",inline" xorm:"-"`
+	ID               int64      `bson:"id" xorm:"pk 'id'" json:"id"`
+	BodyText         string     `bson:"body_text" xorm:"Text" json:"body_text"`
+	Body             string     `bson:"body" xorm:"Text" json:"body"`
+	Incoming         bool       `bson:"incoming" json:"incoming"`
+	ToEmails         []string   `bson:"to_emails" json:"to_emails"`
+	Private          bool       `bson:"private" json:"private"`
+	Source           int        `bson:"source" json:"source"`
+	SupportEmail     string     `bson:"support_email" json:"support_email"`
+	TicketID         int64      `bson:"ticket_id" xorm:"pk 'ticket_id'" json:"ticket_id"`
+	UserID           int64      `bson:"user_id" xorm:"'user_id'" json:"user_id"`
+	CreatedAt        *time.Time `bson:"created_at" json:"created_at"`
+	UpdatedAt        *time.Time `bson:"updated_at" json:"updated_at"`
+	FromEmail        string     `bson:"from_email" json:"from_email"`
+	CCEmails         []string   `bson:"cc_emails" xorm:"'cc_emails'" json:"cc_emails"`
+	BCCEmails        []string   `bson:"bcc_emails" xorm:"'bcc_emails'" json:"bcc_emails"`
 
 	Attachments []interface{} `json:"attachments"`
 }
