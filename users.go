@@ -33,8 +33,8 @@ type UserResults struct {
 }
 
 type User struct {
-	mgm.DefaultModel `bson:",inline" xorm:"-"`
-	ID               int64                  `bson:"id" xorm:"pk 'id'" json:"id,omitempty"`
+	mgm.DefaultModel `bson:",inline"`
+	ID               int64                  `bson:"id" json:"id,omitempty"`
 	Name             string                 `bson:"name" json:"name,omitempty"`
 	Active           string                 `bson:"active" json:"active,omitempty"`
 	Email            string                 `bson:"email" json:"email,omitempty"`
@@ -48,15 +48,15 @@ type User struct {
 	UpdatedAt        *time.Time             `bson:"updated_at" json:"updated_at,omitempty"`
 	Address          string                 `bson:"address" json:"address,omitempty"`
 	Avatar           interface{}            `bson:"avatar" json:"avatar,omitempty"`
-	CompanyID        int64                  `bson:"company_id" xorm:"'company_id'" json:"company_id,omitempty"`
+	CompanyID        int64                  `bson:"company_id" json:"company_id,omitempty"`
 	ViewAllTickets   bool                   `bson:"view_all_tickets" json:"view_all_tickets,omitempty"`
 	CustomFields     map[string]interface{} `bson:"custom_fields" json:"custom_fields,omitempty"`
 	Deleted          bool                   `bson:"deleted" json:"deleted,omitempty"`
-	Description      string                 `bson:"description" xorm:"Text" json:"description,omitempty"`
+	Description      string                 `bson:"description" json:"description,omitempty"`
 	OtherEmails      []string               `bson:"other_emails" json:"other_emails,omitempty"`
 	Tags             []string               `bson:"tags" json:"tags,omitempty"`
 	TwitterID        string                 `bson:"twitter_id" json:"twitter_id,omitempty"`
-	UniqueExternalID string                 `bson:"unique_external_id" xorm:"'unique_external_id'" json:"unique_external_id,omitempty"`
+	UniqueExternalID string                 `bson:"unique_external_id" json:"unique_external_id,omitempty"`
 	OtherCompanies   []string               `bson:"other_companies" json:"other_companies,omitempty"`
 }
 

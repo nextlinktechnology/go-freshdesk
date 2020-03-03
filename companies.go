@@ -26,12 +26,12 @@ func newCompanyManager(client *ApiClient) companyManager {
 }
 
 type Company struct {
-	mgm.DefaultModel `bson:",inline" xorm:"-"`
-	ID               int64                  `bson:"id" xorm:"pk 'id'" json:"id"`
+	mgm.DefaultModel `bson:",inline"`
+	ID               int64                  `bson:"id" json:"id"`
 	Name             string                 `bson:"name" json:"name"`
-	Description      string                 `bson:"description" xorm:"Text" json:"description"`
+	Description      string                 `bson:"description" json:"description"`
 	Domains          []string               `bson:"domains" json:"domains"`
-	Note             string                 `bson:"note" xorm:"Text" json:"note"`
+	Note             string                 `bson:"note" json:"note"`
 	HealthScore      string                 `bson:"health_score" json:"health_score"`
 	AccountTier      string                 `bson:"account_tier" json:"account_tier"`
 	RenewalDate      *time.Time             `bson:"renewal_date" json:"renewal_date"`
