@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Kamva/mgm/v2"
 	"github.com/nextlinktechnology/go-freshdesk/querybuilder"
+	"github.com/nextlinktechnology/mgm/v3"
 )
 
 type TicketManager interface {

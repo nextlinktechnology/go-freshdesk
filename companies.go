@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Kamva/mgm/v2"
+	"github.com/nextlinktechnology/mgm/v3"
 )
 
 type CompanyManager interface {
