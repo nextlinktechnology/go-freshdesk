@@ -38,7 +38,7 @@ func newTicketManager(client *ApiClient) ticketManager {
 }
 
 type Ticket struct {
-	mgm.DefaultModel       `bson:",inline"`
+	mgm.DefaultModel       `bson:",inline" json:"-"`
 	ID                     int64                  `bson:"id" json:"id"`
 	Subject                string                 `bson:"subjecte" json:"subject"`
 	Type                   string                 `bson:"type" json:"type"`
@@ -103,7 +103,7 @@ type CreateTicket struct {
 }
 
 type Conversation struct {
-	mgm.DefaultModel `bson:",inline"`
+	mgm.DefaultModel `bson:",inline" json:"-"`
 	ID               int64      `bson:"id" json:"id"`
 	BodyText         string     `bson:"body_text" json:"body_text"`
 	Body             string     `bson:"body" json:"body"`
