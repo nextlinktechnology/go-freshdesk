@@ -73,6 +73,7 @@ type Ticket struct {
 	CreatedAt              *time.Time             `bson:"created_at" json:"created_at"`
 	UpdatedAt              *time.Time             `bson:"updated_at" json:"updated_at"`
 	CustomFields           map[string]interface{} `bson:"custom_fields" json:"custom_fields"`
+	Conversations          []Conversation         `json:"conversations,omitempty"`
 }
 
 type CreateTicket struct {
